@@ -1,0 +1,30 @@
+{
+  "manifest_version": 2,
+
+  "name": "Flight Saver",
+  "short_name" : "Flight Saver",
+  "description": "To find cheapest domestic flight",
+  "version": "1.0",
+
+  "browser_action": {
+   "default_icon": "flight.png",
+   "128": "flightMono.png",
+   "default_popup": "popup.html"
+  },
+  "background": {
+  		  "persistent": false,
+  		  "scripts": ["background.js"],
+		  "html": ["background.html"]
+  			},
+			
+  "content_scripts": [
+		{
+		"matches" : ["http://www.google.co.in/flights/","https://www.google.co.in/flights/*"], 
+		"js" : ["myScript.js"]
+		}
+	],
+ "permissions": [
+	"<all_urls>",
+	"tabs"
+   ]
+}
