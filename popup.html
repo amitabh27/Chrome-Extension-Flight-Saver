@@ -1,0 +1,253 @@
+<!doctype html>
+
+<html>
+  <head>
+  
+    <title>Cheapest flight</title>
+    <script src="popup.js"></script>
+	<style type="text/css">
+	body {
+    min-width:200px;
+	min-height:450px;
+	}
+	</style>
+	<script src="jquery-1.12.0.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="styleset.css">
+  </head>
+  <body background="f1.jpg">
+  <font color="white"><b>
+ <div bgcolor="grey" style="border:thin">
+ <h3><p align="center" id="myDIV">Get the cheapest flight!!</p><h3>
+ </div>
+ <p id="message" bgcolor="red"></p>
+ 
+ <form name="reg" method="post">
+ From: <br>
+  <label>
+ <select id="from">
+<option value="" selected="selected">Choose your location</option>
+["Delhi","Mumbai","Bengaluru","Chennai","Kolkata","Kochi","Ahmedabad","Hyderabad","Pune","Dabolim",
+"Thiruvanthapuram","Lucknow","Jaipur","Guwahati","Kozikhode","Srinagar","Bhubneshwar","Vishakapatnam","Coimbatore","Indore",
+"Mangaluru","Nagpur","Patna","Chandigarh","Tiruchilapalli","Varnasi","Raipur","Amritsar","Jammu","Bagdora",
+"Vadodra","Agartala","Portblair","Madurai","Imphal","Ranchi","Udaipur","Dehradun","Bhopal","Leh",
+"Rajkot","Vijaywada","Tirupati","Dibrugarh","Jodhpur","Aurangabad","Rajahmundry","Silchar","Jabalpur","Aizwal"
+]
+
+[
+"DEL","BOM","BLR","MAA","CCU","COK","AMD","HYD","PNQ","GOI",
+"TRV","LKO","JAI","GAU","CCJ","SXR","BBI","VTZ","CJB","IDR",
+"IXE","NAG","PAT","IXC","TRZ","VNS","RPR","ATQ","IXJ","IXB",
+"BDQ","IXA","IXZ","IXM","IMF","IXR","UDR","DED","BHO","IXL",
+"RAJ","VJA","TIR","DIB","JDH","IXU","RJA","IXS","JLR","AJL"
+]
+ <option value="DEL">Delhi</option>
+  <option value="BOM">Mumbai</option>
+  <option value="BLR">Bengaluru</option>
+   <option value="MAA">Chennai</option>
+  <option value="CCU">Kolkata</option>
+  <option value="COK">Kochi</option>
+   <option value="AMD">Ahmedabad</option>
+  <option value="HYD">Hyderabad</option>
+  <option value="PNQ">Pune</option>
+   <option value="GOI">Dabolim</option>
+  <option value="TRV">Thiruvanthapuram</option>
+  <option value="LKO">Lucknow</option>
+  <option value="JAI">Jaipur</option>
+  <option value="GAU">Guwahati</option>
+  <option value="CCJ">Kozikhode</option>
+   <option value="SXR">Srinagar</option>
+  <option value="BBI">Bhubneshwar</option>
+  <option value="VTZ">Vishakapatnam</option>
+   <option value="CJB">Coimbatore</option>
+  <option value="IDR">Indore</option>
+  <option value="IXE">Mangaluru</option>
+   <option value="NAG">Nagpur</option>
+  <option value="PAT">Patna</option>
+  <option value="IXC">Chandigarh</option>
+  <option value="TRZ">Tiruchilapalli</option>
+  <option value="VNS">Varnasi</option>
+  <option value="RPR">Raipur</option>
+   <option value="ATQ">Amritsar</option>
+  <option value="IXJ">Jammu</option>
+  <option value="IXB">Bagdora</option>
+   <option value="BDQ">Vadodra</option>
+  <option value="IXA">Agartala</option>
+  <option value="IXZ">Portblair</option>
+   <option value="IXM">Madurai</option>
+  <option value="IMF">Imphal</option>
+  <option value="IXR">Ranchi</option>
+  <option value="UDR">Udaipur</option>
+  <option value="DED">Dehradun</option>
+  <option value="BHO">Bhopal</option>
+   <option value="IXL">Leh</option>
+  <option value="RAJ">Rajkot</option>
+  <option value="VJA">Vijaywada</option>
+   <option value="TIR">Tirupati</option>
+  <option value="DIB">Dibrugarh</option>
+  <option value="JDH">Jodhpur</option>
+   <option value="IXU">Aurangabad</option>
+  <option value="RJA">Rajahmundry</option>
+  <option value="IXS">Silchar</option>
+  <option value="JLR">Jabalpur</option>
+  <option value="AJL">Aizwal</option>  
+</select>
+ </label>
+
+<br><br>
+ To:<br>
+  <label>
+ <select id="to">
+<option value="" selected="selected">Choose your location</option>
+ <option value="DEL">Delhi</option>
+  <option value="BOM">Mumbai</option>
+  <option value="BLR">Bengaluru</option>
+   <option value="MAA">Chennai</option>
+  <option value="CCU">Kolkata</option>
+  <option value="COK">Kochi</option>
+   <option value="AMD">Ahmedabad</option>
+  <option value="HYD">Hyderabad</option>
+  <option value="PNQ">Pune</option>
+   <option value="GOI">Dabolim</option>
+  <option value="TRV">Thiruvanthapuram</option>
+  <option value="LKO">Lucknow</option>
+  <option value="JAI">Jaipur</option>
+  <option value="GAU">Guwahati</option>
+  <option value="CCJ">Kozikhode</option>
+   <option value="SXR">Srinagar</option>
+  <option value="BBI">Bhubneshwar</option>
+  <option value="VTZ">Vishakapatnam</option>
+   <option value="CJB">Coimbatore</option>
+  <option value="IDR">Indore</option>
+  <option value="IXE">Mangaluru</option>
+   <option value="NAG">Nagpur</option>
+  <option value="PAT">Patna</option>
+  <option value="IXC">Chandigarh</option>
+  <option value="TRZ">Tiruchilapalli</option>
+  <option value="VNS">Varnasi</option>
+  <option value="RPR">Raipur</option>
+   <option value="ATQ">Amritsar</option>
+  <option value="IXJ">Jammu</option>
+  <option value="IXB">Bagdora</option>
+   <option value="BDQ">Vadodra</option>
+  <option value="IXA">Agartala</option>
+  <option value="IXZ">Portblair</option>
+   <option value="IXM">Madurai</option>
+  <option value="IMF">Imphal</option>
+  <option value="IXR">Ranchi</option>
+  <option value="UDR">Udaipur</option>
+  <option value="DED">Dehradun</option>
+  <option value="BHO">Bhopal</option>
+   <option value="IXL">Leh</option>
+  <option value="RAJ">Rajkot</option>
+  <option value="VJA">Vijaywada</option>
+   <option value="TIR">Tirupati</option>
+  <option value="DIB">Dibrugarh</option>
+  <option value="JDH">Jodhpur</option>
+   <option value="IXU">Aurangabad</option>
+  <option value="RJA">Rajahmundry</option>
+  <option value="IXS">Silchar</option>
+  <option value="JLR">Jabalpur</option>
+  <option value="AJL">Aizwal</option>  
+</select>
+ </label>
+ <br><br>
+ Departure (dd/mm/yyyy): <br><input type="text" id="datePos1"><br><br>
+ Arrival (dd/mm/yyyy): <br><input type="text" id="datePos2"><br><br>
+ 
+ Preferable Time : 24-hour Format<br>
+<select id="t1">
+ <option value="00" selected>(from) 00</option>
+ <option value="01" >01</option>
+ <option value="02" >02</option>
+ <option value="03" >03</option>
+ <option value="04" >04</option>
+ <option value="05" >05</option>
+ <option value="06" >06</option>
+ <option value="07" >07</option>
+ <option value="08" >08</option>
+ <option value="09" >09</option>
+ <option value="10" >10</option>
+  <option value="11" >11</option>
+  <option value="12" >12</option>
+ <option value="13" >13</option>
+ <option value="14" >14</option>
+ <option value="15" >15</option>
+ <option value="16" >16</option>
+ <option value="17" >17</option>
+ <option value="18" >18</option>
+ <option value="19" >19</option>
+ <option value="20" >20</option>
+ <option value="21" >21</option>
+  <option value="22" >22</option>
+    <option value="23" >23</option>
+</select>
+&nbsp;&nbsp;
+<select id="t2">
+<option value="00" >00</option>
+ <option value="01" >01</option>
+ <option value="02" >02</option>
+ <option value="03" >03</option>
+ <option value="04" >04</option>
+ <option value="05" >05</option>
+ <option value="06" >06</option>
+ <option value="07" >07</option>
+ <option value="08" >08</option>
+ <option value="09" >09</option>
+ <option value="10" >10</option>
+  <option value="11" >11</option>
+  <option value="12" >12</option>
+ <option value="13" >13</option>
+ <option value="14" >14</option>
+ <option value="15" >15</option>
+ <option value="16" >16</option>
+ <option value="17" >17</option>
+ <option value="18" >18</option>
+ <option value="19" >19</option>
+ <option value="20" >20</option>
+ <option value="21" >21</option>
+  <option value="22" >22</option>
+    <option value="23" selected>(to) 23</option>
+	</select><br><br>
+
+
+ 
+ Type of flight : <br><br>
+	<input type="radio" id="flightType1" name="flightType" value="roundTrip" checked>
+	<label for="flightType1">Round Trip</label>
+	<input type="radio" id="flightType2" name="flightType"value="oneWay">
+	<label for="flightType2">One Way</label>
+
+	<!--
+ <input type="radio" name="flightType" id="flightType1" value="roundTrip"> Round Trip<br>
+ <input type="radio" name="flightType" id="flightType2" value="oneWay"> One Way<br><br> -->
+ 
+<br><br>
+ Type of Class:<br><br>
+	<input type="radio" id="flightClass1" name="flightClass" value="economy" checked>
+	<label for="flightClass1">Economy</label>
+	<input type="radio" id="flightClass2" name="flightClass"value="premiumEconomy">
+	<label for="flightClass2">Premium Economy</label>
+	<input type="radio" id="flightClass3" name="flightClass" value="business">
+	<label for="flightClass3">Business</label>
+
+ 
+ <!--
+ <input type="radio" name="flightClass" id="flightClass1" value="economy"> Economy<br>
+ <input type="radio" name="flightClass" id="flightClass2" value="premiumEconomy"> Premium Economy<br>
+ <input type="radio" name="flightClass" id="flightClass3" value="business"> Business<br><br>-->
+ 
+ <br><br>
+ 
+ Number of Seats:<br>
+ <input type="text" name="count" >
+ 
+ <p id="errMsg" color="white"></p>
+ <span></span> 
+ <br><br>
+  <p align="center">
+ <input  type="submit" name="submit" id="go" value="Submit">
+ </p>
+ </form>
+ 
+</b></font>
+</body>
