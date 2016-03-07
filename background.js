@@ -1,9 +1,9 @@
-console.debug("this is it-background");
+//console.debug("this is it-background");
 var message_received="";
 
 function urlGenerator(tempUrl)
 {
- console.debug("parameters received in bg.js:"+tempUrl);
+ //console.debug("parameters received in bg.js:"+tempUrl);
 		var from=tempUrl.substring(0,tempUrl.indexOf("*"));
 		var to=tempUrl.substring(tempUrl.indexOf("*")+1,tempUrl.indexOf("**"));
 		var departureDate=tempUrl.substring(tempUrl.indexOf("**")+2,tempUrl.indexOf("***"));
@@ -14,7 +14,7 @@ function urlGenerator(tempUrl)
 		var t1=tempUrl.substring(tempUrl.indexOf("*******")+7,tempUrl.indexOf("********"));;
 		var t2=tempUrl.substring(tempUrl.indexOf("********")+8,tempUrl.length);;
 		
-		console.debug("--->"+from+" "+to+" "+departureDate+" "+arrivalDate+" "+seats+" "+flightType+" "+classType+" "+t1+" "+t2);
+		//console.debug("--->"+from+" "+to+" "+departureDate+" "+arrivalDate+" "+seats+" "+flightType+" "+classType+" "+t1+" "+t2);
 		
 		var urlToBeLoaded="https://www.google.co.in/flights/#search;";
 		
@@ -108,7 +108,7 @@ function urlLoader(urlToBeLoaded)
 {
 //chrome.tabs.create({ url: urlToBeLoaded });
 chrome.tabs.create({ url: urlToBeLoaded,active : false },function(tab){
-                                                setTimeout(function(){chrome.tabs.remove(tab.id);}, 50000);
+                                                setTimeout(function(){chrome.tabs.remove(tab.id);}, 30000);
                                     });
 }
 

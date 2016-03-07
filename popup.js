@@ -29,7 +29,7 @@ chrome.runtime.onMessage.addListener(
 						var amt=""; var time=""; var airline="";var duration="";var stops="";var flightNum="";
 							if(info.indexOf("No***Results") > -1)
 							{
-							console.debug("Nothing to be done");
+							//console.debug("Nothing to be done");
 							}
 							else
 							{
@@ -164,8 +164,10 @@ chrome.runtime.onMessage.addListener(
 									resultStorage[pointer][4]=stops;
 									resultStorage[pointer][5]=flightNum;
 									
+									
 									if(pointer==0)
 									{
+
 									 var para = document.getElementsByTagName("span")[0];
 									 var tbl     = document.createElement("table");
 									 tbl.id="dataTable";
@@ -302,15 +304,15 @@ if(document.getElementById("flightClass3").checked)
 classType=document.getElementById("flightClass3").value;
 
 
-console.debug(from);
-console.debug(to);
-console.debug(departureDate);
-console.debug(arrivalDate);
-console.debug(seats);
-console.debug(flightType);
-console.debug(classType);
-console.debug(t1);
-console.debug(t2);
+//console.debug(from);
+//console.debug(to);
+//console.debug(departureDate);
+//console.debug(arrivalDate);
+//console.debug(seats);
+//console.debug(flightType);
+//console.debug(classType);
+//console.debug(t1);
+//console.debug(t2);
 
 var checking=false;
 
@@ -328,14 +330,14 @@ var checking=false;
 				else
 				{
 				document.querySelector("#errMsg").innerHTML = "Please specify the date in correct format.";
-				console.debug("Constraint violation : Date");
+				//console.debug("Constraint violation : Date");
 				return false;
 				}	
 			}
 			else
 			{
 			document.querySelector("#errMsg").innerHTML = "Please specify the count of seats correctly (Max Value-6).";
-			console.debug("Constraint violation : Number of seats");
+			//console.debug("Constraint violation : Number of seats");
 			return false;
 			}
 
@@ -343,7 +345,7 @@ var checking=false;
 	else
 	{
 	document.querySelector("#errMsg").innerHTML = "Please provide the complete information.";
-	console.debug("Constraint violation : Empty field found");
+	//console.debug("Constraint violation : Empty field found");
 	return false;
 	}
 	
@@ -391,28 +393,28 @@ console.log("time to quit popup.js");
 	var day=departureDate.substring(0,2);
 	var month=departureDate.substring(3,5);
 	var year=departureDate.substring(6,departureDate.length);
-	console.debug("day="+day+"month="+month+"year="+year);
+	//console.debug("day="+day+"month="+month+"year="+year);
 	
 		if(isNaN(day) || isNaN(month) || isNaN(year))
 		{
-		console.debug("Improper date format.");
+		//console.debug("Improper date format.");
 		return false;
 		}
 		if( departureDate.charAt(2)!='/' || departureDate.charAt(5)!='/')
 		{
-		console.debug("Please use the delimiter for date as specified.");
+		//console.debug("Please use the delimiter for date as specified.");
 		return false;
 		}
 		if(month>12 || month<=0 || day<=0 || day>31 || year<today.getFullYear())
 		{
-		console.debug("Incorrect date1");
+		//console.debug("Incorrect date1");
 		return false;
 		}
 		if(month==4 || month==6 || month==9 || month==11)
 		{
 			if(!(day<=30))
 			{
-			console.debug("Incorrect date2");
+			//console.debug("Incorrect date2");
 			return false;
 			}
 		}
@@ -420,7 +422,7 @@ console.log("time to quit popup.js");
 		{
 			if(!(day<=29))
 			{
-			console.debug("Incorrect date3");
+			//console.debug("Incorrect date3");
 			return false;
 			}
 		}
@@ -428,20 +430,20 @@ console.log("time to quit popup.js");
 		{
 			if(!(day<=28))
 			{
-			console.debug("Incorrect date4");
+			//console.debug("Incorrect date4");
 			return false;
 			}
 		}
 		if(month<(today.getMonth()+1) && day < today.getDate() && year==today.getFullYear())
 		{
-		console.debug("Incorrect date5");
+		//console.debug("Incorrect date5");
 		return false; 
 		}
 		
 	}
 	else
 	{
-	console.debug("Improper date format.");
+	//console.debug("Improper date format.");
 	return false;
 	}
 	
@@ -456,28 +458,28 @@ console.log("time to quit popup.js");
 		var day=arrivalDate.substring(0,2);
 		var month=arrivalDate.substring(3,5);
 		var year=arrivalDate.substring(6,arrivalDate.length);
-		console.debug("day="+day+"month="+month+"year="+year);
+		//console.debug("day="+day+"month="+month+"year="+year);
 		
 			if(isNaN(day) || isNaN(month) || isNaN(year))
 			{
-			console.debug("Improper date format.");
+			//console.debug("Improper date format.");
 			return false;
 			}
 			if( arrivalDate.charAt(2)!='/' || arrivalDate.charAt(5)!='/')
 			{
-			console.debug("Please use the delimiter for date as specified.");
+			//console.debug("Please use the delimiter for date as specified.");
 			return false;
 			}
 			if(month>12 || month<=0 || day<=0 || day>31 || year<today.getFullYear())
 			{
-			console.debug("Incorrect date1");
+			//console.debug("Incorrect date1");
 			return false;
 			}
 			if(month==4 || month==6 || month==9 || month==11)
 			{
 				if(!(day<=30))
 				{
-				console.debug("Incorrect date2");
+				//console.debug("Incorrect date2");
 				return false;
 				}
 			}
@@ -485,7 +487,7 @@ console.log("time to quit popup.js");
 			{
 				if(!(day<=29))
 				{
-				console.debug("Incorrect date3");
+				//console.debug("Incorrect date3");
 				return false;
 				}
 			}
@@ -493,20 +495,20 @@ console.log("time to quit popup.js");
 			{
 				if(!(day<=28))
 				{
-				console.debug("Incorrect date4");
+				//console.debug("Incorrect date4");
 				return false;
 				}
 			}
 			if(month<(today.getMonth()+1) && day < today.getDate() && year==today.getFullYear())
 			{
-			console.debug("Incorrect date5");
+			//console.debug("Incorrect date5");
 			return false; 
 			}
 			
 		}
 		else
 		{
-		console.debug("Improper date format.");
+		//console.debug("Improper date format.");
 		return false;
 		}
 	}
@@ -539,10 +541,12 @@ console.log("time to quit popup.js");
   function flightInfo(from,to,departureDate,arrivalDate,seats,flightType,classType,t1,t2)
   {
   
-	console.debug("inside flightInfo-->"+from+" "+to+" "+departureDate+" "+arrivalDate+" "+seats+" "+flightType+" "+classType+" "+t1+" "+t2);
+	//console.debug("inside flightInfo-->"+from+" "+to+" "+departureDate+" "+arrivalDate+" "+seats+" "+flightType+" "+classType+" "+t1+" "+t2);
 	var consolidatedData=from.concat("*").concat(to).concat("**").concat(departureDate).concat("***").concat(arrivalDate).concat("****").concat(seats).concat("*****").concat(flightType).concat("******").concat(classType).concat("*******").concat(t1).concat("********").concat(t2);
 	
+	document.querySelector("#errMsg").innerHTML = "Gathering results...";
 	chrome.extension.getBackgroundPage().urlGenerator(consolidatedData);
+	
 	
   }
 }, false);
