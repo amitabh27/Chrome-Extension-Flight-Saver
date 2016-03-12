@@ -1,9 +1,9 @@
-//console.debug("this is it-background");
+////console.debug("this is it-background");
 var message_received="";
 
 function urlGenerator(tempUrl)
 {
- //console.debug("parameters received in bg.js:"+tempUrl);
+ ////console.debug("parameters received in bg.js:"+tempUrl);
 		var from=tempUrl.substring(0,tempUrl.indexOf("*"));
 		var to=tempUrl.substring(tempUrl.indexOf("*")+1,tempUrl.indexOf("**"));
 		var departureDate=tempUrl.substring(tempUrl.indexOf("**")+2,tempUrl.indexOf("***"));
@@ -14,7 +14,7 @@ function urlGenerator(tempUrl)
 		var t1=tempUrl.substring(tempUrl.indexOf("*******")+7,tempUrl.indexOf("********"));;
 		var t2=tempUrl.substring(tempUrl.indexOf("********")+8,tempUrl.length);;
 		
-		//console.debug("--->"+from+" "+to+" "+departureDate+" "+arrivalDate+" "+seats+" "+flightType+" "+classType+" "+t1+" "+t2);
+		////console.debug("--->"+from+" "+to+" "+departureDate+" "+arrivalDate+" "+seats+" "+flightType+" "+classType+" "+t1+" "+t2);
 		
 		var urlToBeLoaded="https://www.google.co.in/flights/#search;";
 		
@@ -84,17 +84,17 @@ function scrapeDetails(from,to,departureDate,arrivalDate,seats,flightType,classT
 	
 	
 		
-	console.log("Now calling urlLoader -->url="+urlToBeLoaded);
+	//console.log("Now calling urlLoader -->url="+urlToBeLoaded);
 	urlLoader(urlToBeLoaded);
 	
 	
 	chrome.runtime.onMessage.addListener(
 				function(request, sender, sendResponse) {
 						sendResponse({farewell: "goodbye"});
-						console.log("message received in bg.js:"+request.loc1);
+						//console.log("message received in bg.js:"+request.loc1);
 							
 							chrome.runtime.sendMessage({loc11: request.loc1}, function(response) {
-															console.log("Message sent from bj.js for popup.js");
+															//console.log("Message sent from bj.js for popup.js");
 															
 															return true;
 															});
@@ -107,8 +107,14 @@ function scrapeDetails(from,to,departureDate,arrivalDate,seats,flightType,classT
 function urlLoader(urlToBeLoaded)
 {
 //chrome.tabs.create({ url: urlToBeLoaded });
-chrome.tabs.create({ url: urlToBeLoaded,active : false },function(tab){
+chrome.tabs.create({ url: urlToBeLoaded,active : false},function(tab){
                                                 setTimeout(function(){chrome.tabs.remove(tab.id);}, 30000);
                                     });
+/*var x = new XMLHttpRequest();
+x.open('GET', urlToBeLoaded);*/
+
+
+	
+
 }
 

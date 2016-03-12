@@ -7,7 +7,7 @@ chrome.runtime.onMessage.addListener(
 				function(request, sender, sendResponse) {
 						if(typeof request.loc11!=='undefined' && request.loc11!="" && request.loc11!=null)
 						{
-						console.log("message received in popup.js:"+request.loc11);
+						//console.log("message received in popup.js:"+request.loc11);
 							
 						var names=["Delhi","Mumbai","Bengaluru","Chennai","Kolkata","Kochi","Ahmedabad","Hyderabad","Pune","Dabolim",
 									"Thiruvanthapuram","Lucknow","Jaipur","Guwahati","Kozikhode","Srinagar","Bhubneshwar","Vishakapatnam","Coimbatore","Indore",
@@ -82,7 +82,27 @@ chrome.runtime.onMessage.addListener(
 									else
 									time=info.substring(info.indexOf("one way")+7,info.indexOf("Air India")-1);
 								}
-								if(info.indexOf("Jet Airways") > -1)
+								
+								if(info.indexOf("JetKonnect") > -1)
+								{
+								airline="JetKonnect";
+										if(info.indexOf("Jet Airways") > -1)
+										{
+										airline=airline+", "+"Jet Airways";
+										duration=info.substring(info.lastIndexOf("Jetkonnect")+10,info.lastIndexOf("Jetkonnect")+17);
+										}
+										else if(info.indexOf("Jet Airways")==-1)
+										{
+										duration=info.substring(info.indexOf("Jetkonnect")+10,info.indexOf("Jetkonnect")+17);
+										}
+										
+											if(way=="round trip")
+											time=info.substring(info.indexOf("round trip")+10,info.indexOf("JetKonnect")-1);
+											else
+											time=info.substring(info.indexOf("one way")+7,info.indexOf("JetKonnect")-1);
+								}
+								
+								if(info.indexOf("Jet Airways") > -1 && airline=="")
 								{
 								airline="Jet Airways";
 								if(info.indexOf("Alliance Air") > -1)
@@ -93,18 +113,6 @@ chrome.runtime.onMessage.addListener(
 									time=info.substring(info.indexOf("round trip")+10,info.indexOf("Jet Airways")-1);
 									else
 									time=info.substring(info.indexOf("one way")+7,info.indexOf("Jet Airways")-1);
-								}
-								if(info.indexOf("JetKonnect") > -1)
-								{
-								airline="JetKonnect";
-								if(info.indexOf("Alliance Air") > -1)
-								airline=airline+", "+"Alliance Air";
-								duration=info.substring((info.indexOf(airline))+(2*airline.length)+3,(info.indexOf(airline))+(2*airline.length)+10);
-								
-									if(way=="round trip")
-									time=info.substring(info.indexOf("round trip")+10,info.indexOf("JetKonnect")-1);
-									else
-									time=info.substring(info.indexOf("one way")+7,info.indexOf("JetKonnect")-1);
 								}
 								
 								if(info.indexOf("IndiGo") > -1)
@@ -124,6 +132,41 @@ chrome.runtime.onMessage.addListener(
 								
 								
 								stops=info.substring(info.indexOf(duration)+7,info.indexOf("***"));
+								if(stops.charAt(0)=="m")
+								{
+								stops=stops.substring(1,stops.length);
+								duration=duration.concat("m");
+								}
+								if(time.indexOf("Jet Airways") > -1)
+								{
+								 time=time.replace("Jet Airways","");
+								}
+								if(time.indexOf(",") > -1)
+								{
+								 time=time.replace(",","").trim();
+								}
+								
+								if(stops.indexOf("Non-stop")==-1)
+								for(var i=0;i<names.length;i++)
+								{
+									if(stops.indexOf(codes[i]) > -1)
+									stops=stops.replace(codes[i],names[i]);
+								}
+								
+								if(stops.length > 10)
+								{
+									var temp=stops.indexOf("stops");
+									if(temp!=-1)
+									stops=stops.substring(0,temp).concat("stops:").concat(stops.substring(stops.indexOf("stops")+5,stops.length));
+								}
+								if(stops.length > 10 && stops.indexOf("1 stop") > -1)
+								{
+									var temp=stops.indexOf("stop");
+									if(temp!=-1)
+									stops=stops.substring(0,temp).concat("stop:").concat(stops.substring(stops.indexOf("stop")+4,stops.length));
+								}
+								
+								
 								flightNum=info.substring(info.indexOf("sel=")+4,info.indexOf("a=")-1);
 								
 								for(i=0;i<codes.length;i++)
@@ -131,16 +174,26 @@ chrome.runtime.onMessage.addListener(
 								if(flightNum.indexOf(codes[i]) > -1)
 								flightNum=flightNum.replace(codes[i],"");
 								}
-						
-								if(stops.indexOf(",") > -1)
-								for(var i=0;i<names.length;i++)
+								for(i=0;i<codes.length;i++)
 								{
-									if(stops.indexOf(codes[i]) > -1)
-									stops=stops.replace(codes[i],names[i]);
+								if(flightNum.indexOf(codes[i]) > -1)
+								flightNum=flightNum.replace(codes[i],"");
+								}
+								for(i=0;i<codes.length;i++)
+								{
+								if(flightNum.indexOf(codes[i]) > -1)
+								flightNum=flightNum.replace(codes[i],"");
+								}
+								
+								if(flightNum.indexOf(";") > -1)
+								flightNum=flightNum.substring(0,flightNum.indexOf(";"));
+								
+								if(time.indexOf("+")>-1)
+								{
+								time=time.substring(0,time.indexOf("+"));
 								}
 						
-						
-								//console.log("info="+info);
+								////console.log("info="+info);
 								time=time.replace(/\s+/, "");
 								amt=amt.replace(/\s+/, "");
 								airline=airline.replace(/\s+/, "");
@@ -156,7 +209,7 @@ chrome.runtime.onMessage.addListener(
 								}
 								if(!flag)
 								{
-								console.log(pointer+"###"+"amt="+amt+"***"+"time="+time+"***"+"airline="+airline+"***"+"duration="+duration+"***"+"stops="+stops+"***"+"flightNum="+flightNum);
+								//console.log(pointer+"###"+"amt="+amt+"***"+"time="+time+"***"+"airline="+airline+"***"+"duration="+duration+"***"+"stops="+stops+"***"+"flightNum="+flightNum);
 									resultStorage[pointer][0]=airline;
 									resultStorage[pointer][1]=amt;
 									resultStorage[pointer][2]=time;
@@ -257,9 +310,20 @@ chrome.runtime.onMessage.addListener(
 
 document.addEventListener('DOMContentLoaded', function() {
   var checkPageButton = document.getElementById('go');
+  $( "#datePos1" ).datepicker({
+	dateFormat: 'dd/mm/yy',
+	inline: true
+	
+});
+$( "#datePos2" ).datepicker({
+	dateFormat: 'dd/mm/yy',
+	inline: true
+	
+});
+
   checkPageButton.addEventListener('click', function() {
 
-    chrome.tabs.getSelected(null, function(tab) {
+
 		
 	
 var from="";
@@ -324,7 +388,7 @@ var checking=false;
 				if(isDateCorrect(departureDate,arrivalDate,flightType))
 				{
 				flightInfo(from,to,departureDate,arrivalDate,seats,flightType,classType,t1,t2);
-				console.log("this is where flight info was called from");
+				//console.log("this is where flight info was called from");
 				return true;
 				}
 				else
@@ -349,8 +413,8 @@ var checking=false;
 	return false;
 	}
 	
-console.log("time to quit popup.js");
- });
+//console.log("time to quit popup.js");
+
   }, false);
   
   function isEmptyChecker(from,to,departureDate,arrivalDate,seats,flightType,classType,t1,t2)

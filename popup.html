@@ -5,14 +5,12 @@
   
     <title>Cheapest flight</title>
     <script src="popup.js"></script>
-	<style type="text/css">
-	body {
-    min-width:200px;
-	min-height:450px;
-	}
-	</style>
-	<script src="jquery-1.12.0.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="styleset.css">
+	
+	<script src="jquery/external/jquery/jquery.js"></script>
+	<script src="jquery/jquery-ui.js"></script>
+	<link href="jquery/jquery-ui.css" rel="stylesheet">
+	
   </head>
   <body background="f1.jpg">
   <font color="white"><b>
@@ -151,8 +149,8 @@
 </select>
  </label>
  <br><br>
- Departure (dd/mm/yyyy): <br><input type="text" id="datePos1"><br><br>
- Arrival (dd/mm/yyyy): <br><input type="text" id="datePos2"><br><br>
+ Departure :  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arrival : 
+<br><input type="text" id="datePos1"> &nbsp;&nbsp;&nbsp;<input type="text" id="datePos2"><br><br>
  
  Preferable Time : 24-hour Format<br>
 <select id="t1">
@@ -243,7 +241,7 @@
  
  <p id="errMsg" color="white"></p>
  <span></span> 
- <br><br>
+<br>
   <p align="center">
  <input  type="submit" name="submit" id="go" value="Submit">
  </p>

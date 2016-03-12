@@ -1,4 +1,7 @@
-
+body {
+    min-width:400px;
+	min-height:435px;
+	}
 
 h3
 {
